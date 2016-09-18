@@ -10,7 +10,7 @@ app.get("/:str", function(req, res){
     if(/^[0-9]+$/.test(time) == true){
         time = parseInt(time);
     }
-     console.log(time);
+    // console.log(time);
     var date = new Date(time);
     if(date.getTime()){
         var natural = date.toDateString().split(' ');
