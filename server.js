@@ -1,10 +1,32 @@
 var express = require("express");
 var app = express();
+var response = {};
 
-app.get("", function(req, res){
-    res.end("Hello World");
+app.get("/:str", function(req, res){
+    var time = req.params.str;
+   
+    if(/^[0-9]+$/.test(time) == true){
+        time = parseInt(time);
+    }
+     console.log(time);
+    var date = new Date(time);
+    if(date.getTime()){
+        response = {
+            unix : date.getTime(),
+            natural : date.toDateString()
+        }
+    }
+    else{
+        response = {
+            unix : null,
+            natural : null
+        }
+    }
+    
+    res.json(response);
+    res.end("\n");
 });
 
-app.listen(8080, function(){
-   console.log("App listening on port 8080"); 
+app.listen(process.env.PORT, function(){
+   console.log("App listening on port " + process.env.PORT); 
 });
