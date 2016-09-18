@@ -2,6 +2,8 @@ var express = require("express");
 var app = express();
 var response = {};
 
+
+app.use(express.static(__dirname));
 app.get("/:str", function(req, res){
     var time = req.params.str;
    
@@ -11,9 +13,10 @@ app.get("/:str", function(req, res){
      console.log(time);
     var date = new Date(time);
     if(date.getTime()){
+        var natural = date.toDateString().split(' ');
         response = {
             unix : date.getTime(),
-            natural : date.toDateString()
+            natural : natural[1] + ' ' + natural[2] + ', ' + natural[3]
         }
     }
     else{
